@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Movies</title>
+    <style>
+      .grid {
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+        grid-gap: 2rem;
+        list-style: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="moviesContainer"></div>
+
+    <script>
+      const API_URL = "http://localhost:5000/api/movies/";
+
+      async function fetchMovies() {
+        const response = await fetch(API_URL);
+        const data = await response.json();
+        return data.movies;
+      }
+
+      fetchMovies().then((movies) => {
+        let str = '<ul class="grid">';
+        for (i = 0; i < movies.length; i++) {
+          console.log(movies[i]);
+          str += "<li>";
+          str += '<img src="' + movies[i].thumbnail + '">';
+          str += "<h4>" + movies[i].name + "</h4>";
+          str += "</li>";
+        }
+        str += "</ul>";
+        document.getElementById("moviesContainer").innerHTML = str;
+      });
+    </script>
+  </body>
+</html>
