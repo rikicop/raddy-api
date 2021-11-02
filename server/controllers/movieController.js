@@ -4,7 +4,7 @@ const Movie = require("../models/movie");
 /* GET All Movies */
 
 exports.listMovies = async (req, res) => {
-  let { limit = 10, page = 1, category, q } = req.query;
+  let { limit = 15, page = 1, category, q } = req.query;
 
   const limitRecords = parseInt(limit);
   const skip = (page - 1) * limit;
